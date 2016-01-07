@@ -1,0 +1,20 @@
+<!doctype html>
+<title>timeout functions with string argument</title>
+<link rel="author" title="Sebstian Mayr" href="mailto:wpt@smayr.name">
+<link rel="help" href="https://html.spec.whatwg.org/multipage/#dom-windowtimers-settimeout">
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<div id="log"></div>
+<script>
+"use strict";
+
+async_test(t => {
+  window.onerror = message => {
+    assert_equals(message, "test");
+    t.done();
+    return true;
+  };
+
+  setTimeout("throw new Error('test')", 100);
+});
+</script>
